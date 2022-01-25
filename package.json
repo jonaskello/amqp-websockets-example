@@ -1,5 +1,5 @@
 {
-  "name": "rabbit-web",
+  "name": "amqp-websockets-example",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

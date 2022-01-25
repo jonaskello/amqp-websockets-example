@@ -1,4 +1,4 @@
-# rabbit-web
+# amqp-websockets-example
 
 Example of RabbitMQ AMQP websockets browser application in typescript and react
 
