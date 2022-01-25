@@ -5,8 +5,11 @@ Example of RabbitMQ AMQP websockets browser application in typescript and react
 ## How to run
 
 ```bash
-yarn # install deps
+# install deps
+yarn
+# start rabbit and websockets relay
 docker compose up -d
+# start the app
 yarn start
 ```
 
