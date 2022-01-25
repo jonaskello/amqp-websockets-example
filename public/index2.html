@@ -35,12 +35,12 @@
         document.forms[0].onsubmit = async (e) => {
           e.preventDefault();
           try {
-//  async basicPublish(exchange: string, routingKey: string, data: string|Uint8Array|ArrayBuffer|Buffer|null, properties: AMQPProperties = {}, mandatory = false, immediate = false): Promise<number> {
+            //  async basicPublish(exchange: string, routingKey: string, data: string|Uint8Array|ArrayBuffer|Buffer|null, properties: AMQPProperties = {}, mandatory = false, immediate = false): Promise<number> {
 
-            await ch.basicPublish("elligo.project_command", "", input.value, {
+            // await ch.basicPublish("elligo.project_command", "", input.value, {
+            await ch.basicPublish("amq.fanout", "", input.value, {
               contentType: "text/plain",
             });
-            
           } catch (err) {
             console.error("Error", err, "reconnecting in 1s");
             disablePublish();

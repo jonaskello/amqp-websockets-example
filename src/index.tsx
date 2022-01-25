@@ -44,6 +44,21 @@ function View(): JSX.Element {
     return <div>Channel not connected yet...</div>;
   }
 
+  async function doPublish(ch: AMQPChannel, message: string) {
+    try {
+      //  async basicPublish(exchange: string, routingKey: string, data: string|Uint8Array|ArrayBuffer|Buffer|null, properties: AMQPProperties = {}, mandatory = false, immediate = false): Promise<number> {
+      await ch.basicPublish("amq.fanout", "", message, {
+        contentType: "text/plain",
+      });
+    } catch (err) {
+      console.error("Error", err, "reconnecting in 1s");
+      // disablePublish();
+      setChannel(undefined);
+      //setTimeout(start, 1000);
+    }
+    // input.value = "";
+  }
+
   return (
     <div>
       <textarea id="textarea" rows={10} defaultValue={recvBuffer} />
@@ -74,20 +89,6 @@ function View(): JSX.Element {
 //     // setTimeout(start, 1000);
 //   }
 // }
-
-async function doPublish(ch: AMQPChannel, message: string) {
-  try {
-    //  async basicPublish(exchange: string, routingKey: string, data: string|Uint8Array|ArrayBuffer|Buffer|null, properties: AMQPProperties = {}, mandatory = false, immediate = false): Promise<number> {
-    await ch.basicPublish("amqp.fanout", "", message, {
-      contentType: "text/plain",
-    });
-  } catch (err) {
-    console.error("Error", err, "reconnecting in 1s");
-    // disablePublish();
-    //setTimeout(start, 1000);
-  }
-  // input.value = "";
-}
 
 // function disablePublish() {
 //   document.forms[0].onsubmit = (e) => {
