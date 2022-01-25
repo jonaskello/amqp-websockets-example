@@ -14,7 +14,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "@cloudamqp/amqp-client": "^1.3.2",
+    "@jonaskello-forks/amqp-client": "^1.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
