@@ -18,22 +18,17 @@ function View(): JSX.Element {
       try {
         const conn = await amqp.connect();
         const ch = await conn.channel();
-        // attachPublish(ch);
         const q = await ch.queue("");
         await q.bind("amq.fanout");
-        console.log("connected...");
-        const consumer = await q.subscribe({ noAck: false }, (msg) => {
-          console.log("Received message", msg);
-          //textarea.value += msg.bodyToString() + "\n";
-          setRecvBuffer(recvBuffer + msg.bodyToString() + "\n");
+        await q.subscribe({ noAck: false }, (msg) => {
+          setRecvBuffer((prev) => prev + msg.bodyToString() + "\n");
           msg.ack();
         });
         setChannel(ch);
       } catch (err) {
         console.error("Error", err, "reconnecting in 1s");
-        // disablePublish();
         setChannel(undefined);
-        // setTimeout(start, 1000);
+        // setTimeout(boot, 1000);
       }
     };
     console.log("running boot");
@@ -44,19 +39,15 @@ function View(): JSX.Element {
     return <div>Channel not connected yet...</div>;
   }
 
-  async function doPublish(ch: AMQPChannel, message: string) {
+  async function publishMessage(ch: AMQPChannel, message: string) {
     try {
-      //  async basicPublish(exchange: string, routingKey: string, data: string|Uint8Array|ArrayBuffer|Buffer|null, properties: AMQPProperties = {}, mandatory = false, immediate = false): Promise<number> {
-      await ch.basicPublish("amq.fanout", "", message, {
-        contentType: "text/plain",
-      });
+      await ch.basicPublish("amq.fanout", "", message, { contentType: "text/plain" });
     } catch (err) {
       console.error("Error", err, "reconnecting in 1s");
-      // disablePublish();
       setChannel(undefined);
       //setTimeout(start, 1000);
     }
-    // input.value = "";
+    setMessage("");
   }
 
   return (
@@ -64,34 +55,7 @@ function View(): JSX.Element {
       <textarea id="textarea" rows={10} defaultValue={recvBuffer} />
       <br />
       <input id="message" value={message} onChange={(e) => setMessage(e.target.value)} />
-      <button onClick={() => doPublish(channel, message)}>Send</button>
+      <button onClick={() => publishMessage(channel, message)}>Send</button>
     </div>
   );
 }
-
-// async function start(): Promise<AMQPChannel | undefined> {
-//   try {
-//     const conn = await amqp.connect();
-//     const ch = await conn.channel();
-//     // attachPublish(ch);
-//     const q = await ch.queue("");
-//     await q.bind("amq.fanout");
-//     console.log("connected...");
-//     const consumer = await q.subscribe({ noAck: false }, (msg) => {
-//       console.log("Received message", msg);
-//       //   textarea.value += msg.bodyToString() + "\n";
-//       msg.ack();
-//     });
-//     return ch;
-//   } catch (err) {
-//     console.error("Error", err, "reconnecting in 1s");
-//     // disablePublish();
-//     // setTimeout(start, 1000);
-//   }
-// }
-
-// function disablePublish() {
-//   document.forms[0].onsubmit = (e) => {
-//     alert("Disconnected, waiting to be reconnected");
-//   };
-// }
