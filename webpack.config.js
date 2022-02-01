@@ -4,6 +4,7 @@ module.exports = {
   mode: "development",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".mjs"],
+    fallback: { buffer: false, tls: false, net: false },
   },
   entry: "./src/index.tsx",
   output: {
