@@ -6,8 +6,6 @@ import ReactDOM from "react-dom";
 // This does not work...
 // import AMQPClient from "@cloudamqp/amqp-client";
 import { AMQPWebSocketClient, AMQPChannel } from "@jonaskello-forks/amqp-client";
-// import AMQPClient from "@jonaskello-forks/amqp-client/lib/amqp-websocket-client";
-// import AMQPChannel from "@jonaskello-forks/amqp-client/lib/amqp-channel";
 
 const url = `ws://localhost:15670`;
 const amqp = new AMQPWebSocketClient(url, "/", "guest", "guest");
