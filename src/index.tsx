@@ -1,10 +1,5 @@
-// import AMQPChannel from "./js/amqp-channel";
 import React from "react";
 import ReactDOM from "react-dom";
-// import AMQPClient from "./js/amqp-websocket-client";
-
-// This does not work...
-// import AMQPClient from "@cloudamqp/amqp-client";
 import { AMQPWebSocketClient, AMQPChannel } from "@jonaskello-forks/amqp-client";
 
 const url = `ws://localhost:15670`;
