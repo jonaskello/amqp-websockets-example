@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
+"@cloudamqp/amqp-client@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@cloudamqp/amqp-client/-/amqp-client-2.0.0.tgz#57746b461b12e1364710775bf0b63b6a167bc008"
+  integrity sha512-ADHNEgolOKBBXKgpdZWWqiYA+e3qXiuJXUWyg4V3HedXzL8y9LzK24cfAgLVOKXeBhFQBlmlgTSxBCHK4yanZQ==
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz#d5e0706cf8c6acd8c6032f8d54070af261bbbb2f"
   integrity sha512-ws57AidsDvREKrZKYffXddNkyaF14iHNHm8VQnZH6t99E8gczjNN0GpvcGny0imC80yQ0tHz1xVUKk/KFQSUyA==
-
-"@jonaskello-forks/amqp-client@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@jonaskello-forks/amqp-client/-/amqp-client-2.0.2.tgz#25e81b55d4b6deed032320802fb5ebeb0a83194d"
-  integrity sha512-BDt5/NVGaJR+cFC04Z2hMpFmamqgBBhdaSfPK0LpMDfFgvNhcJkYU5lx3z6OhtFWe+qwsb9tNOwxqWyVZM6NXA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

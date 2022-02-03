@@ -7,6 +7,7 @@ module.exports = {
     fallback: { buffer: false, tls: false, net: false },
   },
   entry: "./src/index.tsx",
+  devtool: "source-map",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
