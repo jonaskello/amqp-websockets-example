@@ -13,38 +13,45 @@ function View(): JSX.Element {
   const [recvBuffer, setRecvBuffer] = React.useState("");
 
   React.useEffect(() => {
-    const boot = async () => {
+    const connect = async () => {
+      if (channel?.connection.closed === false) {
+        console.log("Already connected");
+        return;
+      }
       try {
+        console.log("Connecting...");
         const conn = await amqp.connect();
         const ch = await conn.channel();
         const q = await ch.queue("");
         await q.bind("amq.fanout");
         await q.subscribe({ noAck: false }, (msg) => {
+          console.log("Received message");
           setRecvBuffer((prev) => prev + msg.bodyToString() + "\n");
           msg.ack();
         });
         setChannel(ch);
+        console.log("Connected!");
       } catch (err) {
-        console.error("Error", err, "reconnecting in 1s");
+        console.error("connect Error", err, "reconnecting in 1s");
         setChannel(undefined);
-        // setTimeout(boot, 1000);
+        setTimeout(connect, 1000);
       }
     };
-    console.log("running boot");
-    boot();
-  }, []);
+    console.log("Calling connect");
+    connect();
+  }, [channel?.connection.closed]);
 
   if (channel === undefined) {
     return <div>Channel not connected yet...</div>;
   }
 
   async function publishMessage(ch: AMQPChannel, message: string) {
+    console.log("Calling publishMessage");
     try {
       await ch.basicPublish("amq.fanout", "", message, { contentType: "text/plain" });
     } catch (err) {
-      console.error("Error", err, "reconnecting in 1s");
+      console.error("publishMessage Error", err, "reconnecting in 1s");
       setChannel(undefined);
-      //setTimeout(start, 1000);
     }
     setMessage("");
   }
