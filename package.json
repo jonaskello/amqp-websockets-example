@@ -1,5 +1,5 @@
 {
-  "name": "amqp-websockets-example-ts-react-webpack",
+  "name": "amqp-example-ws-ts-react-webpack",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

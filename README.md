@@ -1,4 +1,4 @@
-# amqp-websockets-example-ts-react-webpack
+# amqp-example-ws-ts-react-webpack
 
 Example of @cloudamqp/amqp-client package connecting to RabbitMQ/AMQP via websockets in a browser application using typescript, react and webpack.
 
